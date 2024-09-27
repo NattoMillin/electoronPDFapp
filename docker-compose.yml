@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  electoronContainer:
+    container_name: electoronContainer
+    build:
+      context: .
+      dockerfile: apps/Dockerfile
+    tty: true
+    volumes:
+      - ./apps/rootDir:/home/node/dev
+    ports:
+      - 3000:3000
+    networks:
+      - appNetwork
+  backendDRF:
+    container_name: backendDRF
+    build:
+      context: .
+      dockerfile: backs/Dockerfile
+      target: dev
+      args:
+        - USERNAME=${USERNAME}
+        - GROUPNAME=${GROUPNAME}
+        - UID=${UID}
+        - GID=${GID}
+    tty: true
+    volumes:
+      - ./backs/rootDir:/home/dev/backend
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - appNetwork
+  db:
+    container_name: db
+    image: postgres:13-bullseye
+    volumes:
+      - electoronVolume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    networks:
+      - appNetwork
+
+volumes:
+  electoronVolume:
+
+networks:
+  appNetwork:
+    driver: bridge

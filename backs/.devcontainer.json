@@ -1,0 +1,49 @@
+{
+  "name": "Backends Container",
+  "dockerComposeFile": "../docker-compose.back.yml",
+  "workspaceFolder": "/home/dev/backend",
+  "service": "backend",
+  "runServices": [
+    "backend",
+    "db"
+    // "nginx_back"
+  ],
+  // リモート先のVS Codeにインストールする拡張機能
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "thebarkman.vscode-djaneiro",
+        "ecmel.vscode-html-css",
+        "batisteo.vscode-django",
+        "redhat.vscode-yaml",
+        "formulahendry.auto-rename-tag",
+        "ionutvmi.path-autocomplete",
+        "shardulm94.trailing-spaces",
+        "kevinrose.vsc-python-indent",
+        "smelukov.vscode-csstree",
+        "oderwat.indent-rainbow",
+        "vincaslt.highlight-matching-tag",
+        "mosapride.zenkaku",
+        "pranaygp.vscode-css-peek",
+        "vscode-icons-team.vscode-icons",
+        "phind.phind"
+      ],
+      "settings": {
+        "editor.fontFamily": "'Source Han Code JP'",
+        "terminal.integrated.fontFamily": "'Source Han Code JP'",
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true
+        },
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnPaste": true,
+        "python.analysis.extraPaths": [
+          "/home/dev/.local/lib/python3.12/site-packages"
+        ]
+      }
+    }
+  },
+  "shutdownAction": "stopCompose"
+}
